@@ -12,6 +12,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
       - name: Install Python Deps
         run: python3 -m pip install tox wheel virtualenv setuptools
       - name: Create Release
@@ -24,7 +28,7 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-      - name: Run Tests
+      - name: Publish to PyPI
         run: python3 -m tox -e publish
         env:
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
