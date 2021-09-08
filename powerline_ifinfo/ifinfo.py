@@ -21,3 +21,12 @@ def interface_up(
     return [{
         "contents": contents,
     }]
+
+
+def default_interface(pl, format="{device} is {status}"):
+    interface = ifcfg.default_interface()
+    contents = format.format(**interface)
+
+    return [{
+        "contents": contents,
+    }]
